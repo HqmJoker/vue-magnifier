@@ -28,7 +28,7 @@
    npm run dev
    ```
 
-![image-20210803144622937](C:\Users\huafeng\AppData\Roaming\Typora\typora-user-images\image-20210803144622937.png)
+![image-20210803144622937](./readme-images/image-20210803144622937.png)
 
 ### 踩坑1：
 
@@ -36,7 +36,7 @@
 
 ​	**报错信息**：
 
-![image-20210803145809981](C:\Users\huafeng\AppData\Roaming\Typora\typora-user-images\image-20210803145809981.png)
+![image-20210803145809981](./readme-images/image-20210803145809981.png)
 
 ![https://v2fy.com/asset/0i/ChineseBQB/024Programmer_程序员👨‍💻‍BQB/程序员00034-挺秃然的.jpg](https://v2fy.com/asset/0i/ChineseBQB/024Programmer_%E7%A8%8B%E5%BA%8F%E5%91%98%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB%E2%80%8DBQB/%E7%A8%8B%E5%BA%8F%E5%91%9800034-%E6%8C%BA%E7%A7%83%E7%84%B6%E7%9A%84.jpg)
 
