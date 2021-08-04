@@ -1,7 +1,7 @@
 <template>
   <div class="magnifier" ref="magnifier" @mouseover="showZoomBox" @mouseout="hiddenZoomBox" @mousemove="moveCursor">
     <img class="magnifier-thumbnail" :src="imgUrl" alt="缩略图"  />
-    <span v-show="isShowCursor" class="magnifier-cursor" :style="cursorStyle" ></span>
+    <span class="magnifier-cursor" :style="cursorStyle" ></span>
   </div>
 </template>
 
@@ -40,29 +40,29 @@
     } ,
     methods: {
       showZoomBox(event) {
-        console.log(event)
         const halfCursor = this.cursorWidth / 2;
-        const left = event.clientX - this.magnifierBoxLeft - halfCursor; // 863 860 25
+        const left = event.clientX - this.magnifierBoxLeft - halfCursor;
         const top = event.clientY - this.magnifierBoxTop - halfCursor;
         // 处理光标左侧
-        if(left < halfCursor) { // 防止左侧溢出
+        if(left < 0) { // 防止左侧溢出
           this.cursorLeft = 0;
         }
-        if(left >= halfCursor && left <= 200 - halfCursor) {
-          this.cursorLeft = left
+        // 1055 62 170
+        if(left >= 0 && left <= 200 - this.cursorWidth) {
+          this.cursorLeft = left;
         }
-        if(left > 200 - halfCursor) { // 防止右侧溢出
-          this.cursorLeft = 200 - halfCursor;
+        if(left > 200 - this.cursorWidth) { // 防止右侧溢出
+          this.cursorLeft = 200 - this.cursorWidth;
         }
         // 处理光标顶部
-        if(top < halfCursor) { // 防止顶部溢出
+        if(top < 0) { // 防止顶部溢出
           this.cursorTop = 0;
         }
-        if(top >= halfCursor && top <= 200 - halfCursor) {
-          this.cursorTop = top
+        if(top >= 0 && top <= 200 - this.cursorWidth) {
+          this.cursorTop = top;
         }
-        if(top > 200 - halfCursor) { // 防止底部溢出
-          this.cursorTop = 200 - halfCursor;
+        if(top > 200 - this.cursorWidth) { // 防止底部溢出
+          this.cursorTop = 200 - this.cursorWidth;
         }
         this.isShowCursor = true;
       },
@@ -73,31 +73,31 @@
         this.cursorTop = 0;
       },
       moveCursor(event) {
-        // console.log(event)
-        // const halfCursor = this.cursorWidth / 2;
-        // const left = event.offsetX - halfCursor;
-        // const top = event.offsetY - halfCursor;
-        // // 处理光标左侧
-        // if(left < halfCursor) { // 防止左侧溢出
-        //   this.cursorLeft = 0;
-        // }
-        // if(left >= halfCursor && left <= 200 - halfCursor) {
-        //   this.cursorLeft = left
-        // }
-        // if(left > 200 - halfCursor) { // 防止右侧溢出
-        //   this.cursorLeft = 200 - halfCursor;
-        // }
-        // // 处理光标顶部
-        // if(top < halfCursor) { // 防止顶部溢出
-        //   this.cursorTop = 0;
-        // }
-        // if(top >= halfCursor && top <= 200 - halfCursor) {
-        //   this.cursorTop = top
-        // }
-        // if(top > 200 - halfCursor) { // 防止底部溢出
-        //   this.cursorTop = 200 - halfCursor;
-        // }
-        // this.isShowCursor = true;
+        const halfCursor = this.cursorWidth / 2;
+        const left = event.clientX - this.magnifierBoxLeft - halfCursor;
+        const top = event.clientY - this.magnifierBoxTop - halfCursor;
+        // 处理光标左侧
+        if(left < 0) { // 防止左侧溢出
+          this.cursorLeft = 0;
+        }
+        // 1055 62 170
+        if(left >= 0 && left <= 200 - this.cursorWidth) {
+          this.cursorLeft = left;
+        }
+        if(left > 200 - this.cursorWidth) { // 防止右侧溢出
+          this.cursorLeft = 200 - this.cursorWidth;
+        }
+        // 处理光标顶部
+        if(top < 0) { // 防止顶部溢出
+          this.cursorTop = 0;
+        }
+        if(top >= 0 && top <= 200 - this.cursorWidth) {
+          this.cursorTop = top;
+        }
+        if(top > 200 - this.cursorWidth) { // 防止底部溢出
+          this.cursorTop = 200 - this.cursorWidth;
+        }
+        this.isShowCursor = true;
       },
     }
   }
