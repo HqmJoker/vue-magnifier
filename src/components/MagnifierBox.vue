@@ -1,7 +1,10 @@
 <template>
   <div class="magnifier" ref="magnifier" @mouseover="showZoomBox" @mouseout="hiddenZoomBox" @mousemove="moveCursor">
-    <img class="magnifier-thumbnail" :src="imgUrl" alt="缩略图"  />
-    <span class="magnifier-cursor" :style="cursorStyle" ></span>
+    <img class="magnifier-thumbnail" :src="imgUrl" alt="缩略图" />
+    <span class="magnifier-cursor" :style="cursorStyle"></span>
+    <div class="magnifier-area" v-show="isShowCursor">
+      <img :src="imgUrl" alt="放大图" :style="magnifierAreaStyle" />
+    </div>
   </div>
 </template>
 
@@ -36,6 +39,14 @@
           left: this.cursorLeft + 'px',
           top: this.cursorTop + 'px'
         }
+      },
+      magnifierAreaStyle() {
+        return {
+          // width: this.cursorWidth + 'px',
+          // height: this.cursorHeight + 'px',
+          left: -this.cursorLeft * 3 + 'px', // 此处相对位置需要取负值，因为光标往下移动时，图片需要相对往上移才能显示对应的区域
+          top: -this.cursorTop * 3 + 'px'
+        }
       }
     } ,
     methods: {
@@ -47,7 +58,6 @@
         if(left < 0) { // 防止左侧溢出
           this.cursorLeft = 0;
         }
-        // 1055 62 170
         if(left >= 0 && left <= 200 - this.cursorWidth) {
           this.cursorLeft = left;
         }
@@ -67,7 +77,6 @@
         this.isShowCursor = true;
       },
       hiddenZoomBox() {
-        console.log(222)
         this.isShowCursor = false;
         this.cursorLeft = 0;
         this.cursorTop = 0;
@@ -80,7 +89,6 @@
         if(left < 0) { // 防止左侧溢出
           this.cursorLeft = 0;
         }
-        // 1055 62 170
         if(left >= 0 && left <= 200 - this.cursorWidth) {
           this.cursorLeft = left;
         }
@@ -109,9 +117,6 @@
     width: 200px;
     height: 200px;
     margin: 0 auto;
-    background-color: pink;
-  }
-  .magnifier-thumbnail {
   }
   .magnifier-cursor {
     position: absolute;
@@ -123,5 +128,19 @@
     width: 50px;
     height: 50px;
     cursor: crosshair;
+  }
+  .magnifier-area {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    background-color: #e8e8e8;
+    overflow: hidden;
+  }
+  .magnifier-area img {
+    width: 600px;
+    position: absolute;
   }
 </style>
